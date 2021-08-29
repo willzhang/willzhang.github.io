@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -25,3 +25,4 @@ jobs:
           github_token: ${{ secrets.MY_TOKEN }}
           publish_dir: ./public
           publish_branch: hugo
+          commit_message: ${{ github.event.head_commit.message }}
