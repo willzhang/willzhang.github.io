@@ -1,2 +1,2 @@
 # willzhang.github.io
-will blog!
+will blog with [hugo-theme-cleanwhite]https://github.com/zhaohuabing/hugo-theme-cleanwhite
