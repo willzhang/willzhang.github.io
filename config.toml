@@ -14,9 +14,9 @@ home = ["HTML", "RSS", "Algolia"]
 
 [params]
   header_image = "img/home-bg-jeep.jpg"
-  SEOTitle = "赵化冰的博客 | Zhaohuabing Blog"
-  description = "赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。"
-  keyword = "赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"
+  SEOTitle = "will的博客 | Will Blog"
+  description = "will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"
+  keyword = "will, willzhang, will的网络日志, will的博客, will Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"
   slogan = "路在脚下，心向远方"
 
   image_404 = "img/404-bg.jpg"
@@ -83,8 +83,8 @@ home = ["HTML", "RSS", "Algolia"]
   #git           = "full profile url for git user"
   
   [[params.friend_link]]
-  title = "Linda的博客"
-  href =  "https://zhaozhihan.com"
+  title = "will的博客"
+  href =  "https://willzhang.github.com"
 
   [[params.bookmark_link]]
   title =  "Martin Fowler"
