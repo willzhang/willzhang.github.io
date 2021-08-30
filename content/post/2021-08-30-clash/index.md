@@ -1,5 +1,4 @@
 ---
-layout:     post
 title:      "clash安装使用教程"
 subtitle:   "clash安装使用教程subtitle"
 description: "Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。"
@@ -11,14 +10,14 @@ categories: [ VPN ]
 image: "https://img.zhaohuabing.com/in-post/2018-06-02-istio08/background.jpg"
 ---
 
+
 ## clash简介
 
 Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。
 Clash分为开源版本与闭源版本（Premium版）：
 闭源版本（Premium版）比开源版本多以下功能：TUN、Script（脚本模式）、Rule Providers。
 详见：<https://github.com/Dreamacro/clash/wiki/Premium-Core-Features>
-闭源版本内核（Premium版）下载地址：
-<https://github.com/Dreamacro/clash/releases/tag/premium>
+闭源版本内核（Premium版）下载地址：<https://github.com/Dreamacro/clash/releases/tag/premium>
 
 各个组件说明：
 
@@ -40,15 +39,13 @@ Clash分为开源版本与闭源版本（Premium版）：
 Clash for Windows 是运行在 Windows 上的一图形化 Clash 分支。通过 Clash API 来配置和控制 Clash 核心程序，便于用户可视化操作和使用。
 
 返回到「General」部分，将「System Proxy」的开关更改为绿色状态即可开始使用。此外，建议将「Start with Windows」也更改为绿色来让 Clash for Windows 在开机时自动启动。
-
-![](../images/screenshot\_1626065945903.png)
+![](contact-bg.jpg)
 
 ## 配置参数
 
 Clash for Windows 界面简介
 
 * `General（常规）`：
-
   * `Port`；为 HTTP、SOCKS 代理端口，点击终端图案可以打开一个配置了代理的命令行窗口，点击端口数字可以复制该命令；
   * `Allow LAN`：启用局域网共享代理功能；‘
   * `Log Level`：日志等级；
@@ -59,7 +56,7 @@ Clash for Windows 界面简介
   * `Mixin`:
   * `System Proxy`：启用系统代理；
   * `Start with Windows`：设置开机自启；
-
+  
 * `Proxies（代理）`：选择代理方式（Global - 全局、Rule - 规则、Direct - 直连）及策略组节点选择；
 
 * `Profiles（配置管理）`：
@@ -81,7 +78,7 @@ Clash for Windows 界面简介
 
 下载安装clash
 
-```bash
+```
 wget https://github.com/Dreamacro/clash/releases/download/v1.6.5/clash-linux-amd64-v1.6.5.gz
 gunzip -c clash-linux-amd64-v1.6.5.gz > /usr/local/bin/clash
 chmod +x /usr/local/bin/clash
@@ -113,17 +110,12 @@ proxies:
 proxy-groups:
 ......
 ```
-
 建议从clash for windows客户端导出现有config.yaml配置文件
-![](../images/screenshot\_1630129721260.png)
-
-
-
-![](images/screenshot\_1630304278069.png)
+![](../images/screenshot_1630129721260.png)
 
 启动clash进程
 
-```bash
+```
 nohup clash &
 ```
 
@@ -137,7 +129,7 @@ export ALL_PROXY=socks5://127.0.0.1:7890
 
 测试访问
 
-```bash
+```
 curl www.google.com
 ```
 
@@ -145,7 +137,7 @@ curl www.google.com
 
 创建clash配置文件目录
 
-```bash
+```
 mkdir -p /root/.config/clash/
 ```
 
@@ -216,4 +208,3 @@ docker run -d --name clash-client \
   -v /root/.config/clash:/root/.config/clash \
   dreamacro/clash
 ```
-
