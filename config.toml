@@ -36,6 +36,10 @@ home = ["HTML", "RSS", "Algolia"]
 
   # Sidebar settings
   sidebar_about_description = "Software Developer, Open Source Enthusiast and Life Adventurer"
+<<<<<<< Updated upstream
+=======
+  #sidebar_avatar = "img/avatar-zhaohuabing.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+>>>>>>> Stashed changes
   sidebar_avatar = "img/tt.png"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true 
