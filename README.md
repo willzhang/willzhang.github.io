@@ -1,4 +1,4 @@
-## Will hugo blog
+## will hugo blog
 
 Will hugo blog with [hugo-theme-cleanwhite](https://github.com/zhaohuabing/hugo-theme-cleanwhite).
 
