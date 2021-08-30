@@ -3,6 +3,6 @@
 Will hugo blog with [hugo-theme-cleanwhite](https://github.com/zhaohuabing/hugo-theme-cleanwhite).
 
 * publish with github action
-* branch main: content
-* branch hugo: publish
+* branch main: for content
+* branch gh-pages: for publish
 
