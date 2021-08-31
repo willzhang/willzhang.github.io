@@ -79,7 +79,7 @@ Clash for Windows 界面简介
 
 下载安装clash
 
-```
+```bash
 wget https://github.com/Dreamacro/clash/releases/download/v1.6.5/clash-linux-amd64-v1.6.5.gz
 gunzip -c clash-linux-amd64-v1.6.5.gz > /usr/local/bin/clash
 chmod +x /usr/local/bin/clash
@@ -120,13 +120,13 @@ rules:
 
 启动clash进程
 
-```
+```bash
 nohup clash &
 ```
 
 配置代理
 
-```
+```bash
 export http_proxy=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 export ALL_PROXY=socks5://127.0.0.1:7890
@@ -134,7 +134,7 @@ export ALL_PROXY=socks5://127.0.0.1:7890
 
 测试访问
 
-```
+```bash
 curl www.google.com
 ```
 
@@ -142,13 +142,13 @@ curl www.google.com
 
 创建clash配置文件目录
 
-```
+```bash
 mkdir -p /root/.config/clash/
 ```
 
 创建clash配置文件
 
-```
+```yaml
 # cat /root/.config/clash/config.yaml
 mixed-port: 7890
 allow-lan: true
@@ -177,7 +177,7 @@ rules:
 
 启动clash
 
-```
+```bash
 docker run -d --name clash-client \
   --restart always \
   -p 7890:7890 \
@@ -190,7 +190,7 @@ docker run -d --name clash-client \
 
 下载安装
 
-```
+```bash
 mkdir -p /root/.config/clash/
 wget https://github.com/Dreamacro/clash-dashboard/archive/gh-pages.zip
 unzip gh-pages.zip -d /root/.config/clash/
@@ -198,7 +198,7 @@ unzip gh-pages.zip -d /root/.config/clash/
 
 修改clash配置文件
 
-```
+```yaml
 external-controller: 0.0.0.0:9090
 secret: "123456"
 external-ui: clash-dashboard-gh-pages
@@ -208,7 +208,7 @@ external-ui: clash-dashboard-gh-pages
 
 docker集成clash-dashboard
 
-```
+```bash
 docker run -d --name clash-client \
   --restart always \
   -p 7890:7890 \
