@@ -7,7 +7,7 @@ date:       2021-08-30
 tags:
     - vpn
 categories: [ VPN ]
-image: "img/clash_cover.png"
+image: "img/Statue-of-Liberty.jpeg"
 ---
 
 ## clash简介
