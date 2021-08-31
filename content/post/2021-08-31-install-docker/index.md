@@ -7,7 +7,7 @@ date:       2021-08-31
 tags:
     - docker
 categories: [ TECH ]
-image: "![](docker.png)"
+image: "docker.png"
 ---
 
 ## linux 安装 docker
