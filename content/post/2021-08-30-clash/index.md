@@ -10,7 +10,6 @@ categories: [ VPN ]
 image: "https://img.zhaohuabing.com/in-post/2018-06-02-istio08/background.jpg"
 ---
 
-
 ## clash简介
 
 Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。
@@ -56,7 +55,7 @@ Clash for Windows 界面简介
   * `Mixin`:
   * `System Proxy`：启用系统代理；
   * `Start with Windows`：设置开机自启；
-  
+
 * `Proxies（代理）`：选择代理方式（Global - 全局、Rule - 规则、Direct - 直连）及策略组节点选择；
 
 * `Profiles（配置管理）`：
@@ -110,8 +109,9 @@ proxies:
 proxy-groups:
 ......
 ```
+
 建议从clash for windows客户端导出现有config.yaml配置文件
-![](../images/screenshot_1630129721260.png)
+![](../images/screenshot\_1630129721260.png)
 
 启动clash进程
 
@@ -208,3 +208,4 @@ docker run -d --name clash-client \
   -v /root/.config/clash:/root/.config/clash \
   dreamacro/clash
 ```
+

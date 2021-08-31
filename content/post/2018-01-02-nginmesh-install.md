@@ -18,7 +18,9 @@ categories: [ Tech ]
 ## 前言
 
 Nginmesh是NGINX的Service Mesh开源项目，用于Istio服务网格平台中的数据面代理。它旨在提供七层负载均衡和服务路由功能，与Istio集成作为sidecar部署，并将以“标准，可靠和安全的方式”使得服务间通信更容易。Nginmesh在今年底已经连续发布了0.2和0.3版本，提供了服务发现，请求转发，路由规则，性能指标收集等功能。
-<!--more-->
+
+
+
 ![Nginmesh sidecar proxy](https://raw.githubusercontent.com/nginmesh/nginmesh/master/images/nginx_sidecar.png)
 
 > 备注：本文安装指南基于Ubuntu 16.04，在Centos上某些安装步骤的命令可能需要稍作改动。
@@ -30,12 +32,14 @@ Kubernetes Cluster包含etcd, api server, scheduler，controller manager等多�
 首先参照[kubeadm的说明文档](https://kubernetes.io/docs/setup/independent/install-kubeadm)在计划部署kubernetes cluster的每个节点上安装docker，kubeadm, kubelet 和 kubectl。
 
 安装docker
+
 ```
 apt-get update
 apt-get install -y docker.io
 ```
 
 使用google的源安装kubelet kubeadm和kubectl
+
 ```
 apt-get update && apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -45,6 +49,7 @@ EOF
 apt-get update
 apt-get install -y kubelet kubeadm kubectl
 ```
+
 使用kubeadmin安装kubernetes cluster
 
 Nginmesh使用Kubernetes的[Initializer机制](https://kubernetes.io/docs/admin/extensible-admission-controllers/#initializers)来实现sidecar的自动注入。Initializer目前是kubernetes的一个Alpha feature，缺省是未启用的，需要[通过api server的参数](https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)打开。因此我们先创建一个kubeadm-conf配置文件，用于配置api server的启动参数
@@ -56,25 +61,32 @@ apiServerExtraArgs:
   admission-control: Initializers,NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,ValidatingAdmissionWebhook,ResourceQuota,DefaultTolerationSeconds,MutatingAdmissionWebhook
   runtime-config: admissionregistration.k8s.io/v1alpha1
 ```
+
 使用kubeadmin init命令创建kubernetes master节点。
 可以先试用--dry-run参数验证一下配置文件。
+
 ```
 kubeadm init --config kubeadm-conf --dry-run
 ```
+
 如果一切正常，kubeadm将提示：Finished dry-running successfully. Above are the resources that would be created.
 
 下面再实际执行创建命令
+
 ```
 kubeadm init --config kubeadm-conf
 ```
+
 kubeadm会花一点时间拉取docker image，命令完成后，会提示如何将一个work node加入cluster。如下所示：
 
 ```
  kubeadm join --token fffbf6.13bcb3563428cf23 10.12.5.15:6443 --discovery-token-ca-cert-hash sha256:27ad08b4cd9f02e522334979deaf09e3fae80507afde63acf88892c8b72f143f
- ```
+```
+
 > 备注：目前kubeadm只能支持在一个节点上安装master，支持高可用的安装将在后续版本实现。kubernetes官方给出的workaround建议是定期备份 etcd 数据[kubeadm limitations](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#limitations)。
 
 Kubeadm并不会安装Pod需要的网络，因此需要手动安装一个Pod网络，这里采用的是Calico
+
 ```
 kubectl apply -f https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml
 ```
@@ -87,7 +99,7 @@ NAME             TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 svc/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   12m
 ```
 
- 在每台工作节点上执行上述kubeadm join命令，即可把工作节点加入集群中。使用kubectl 命令检查cluster中的节点情况。
+在每台工作节点上执行上述kubeadm join命令，即可把工作节点加入集群中。使用kubectl 命令检查cluster中的节点情况。
 
 ```
  ubuntu@kube-1:~$ kubectl get nodes
@@ -115,9 +127,11 @@ istio-pilot     ClusterIP      10.111.110.65   <none>        15003/TCP,443/TCP  
 ```
 http://10.12.5.31:32765/productpage
 ```
+
 想要了解更多关于如何从集群外部进行访问的内容，可以参考[如何从外部访问Kubernetes集群中的应用？](http://zhaohuabing.com/2017/11/28/access-application-from-outside/)
 
 ## 查看自动注入的sidecar
+
 使用 kubectl get pod reviews-v3-5fff595d9b-zsb2q -o yaml 命令查看Bookinfo应用的reviews服务的Pod。
 
 ```
@@ -382,5 +396,4 @@ iptables -t nat -N ISTIO_OUTPUT                                               -m
 * [Using kubeadm to Create a Cluster](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#14-installing-kubeadm-on-your-hosts)
 
 * [Kubernetes Reference Documentation-Dynamic Admission Control](https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature)
-
 
