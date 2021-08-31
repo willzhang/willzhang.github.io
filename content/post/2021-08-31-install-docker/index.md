@@ -1,7 +1,13 @@
 ---
 title:      "linux 安装 docker"
+subtitle:   "clash安装使用教程subtitle"
+description: "Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上。"
 author:     "will"
 date:       2021-08-31
+tags:
+    - docker
+categories: [ TECH ]
+image: "![](docker.png)"
 ---
 
 ## linux 安装 docker
@@ -13,6 +19,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 安装参考：
 
 <https://github.com/docker/docker-install>
+
 <https://docs.docker.com/engine/install/centos/#install-using-the-convenience-script>
 
 官方脚本安装docker
