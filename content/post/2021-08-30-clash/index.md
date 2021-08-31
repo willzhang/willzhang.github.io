@@ -7,7 +7,7 @@ date:       2021-08-30
 tags:
     - vpn
 categories: [ VPN ]
-image: "https://img.zhaohuabing.com/in-post/2018-06-02-istio08/background.jpg"
+image: "img/clash_cover.jpg"
 ---
 
 ## clash简介
