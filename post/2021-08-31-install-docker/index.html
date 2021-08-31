@@ -6,7 +6,8 @@ will
 on
 Tuesday, August 31, 2021</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-11 col-lg-offset-1
 col-md-10 col-md-offset-1
-post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><ul><li><a href=#linux-安装-docker>linux 安装 docker</a></li></ul></li></ul></nav><h2 id=linux-安装-docker>linux 安装 docker</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上</p><p><img src=docker.png alt></p><p>参考：</p><p><a href=https://github.com/docker/docker-install>https://github.com/docker/docker-install</a></p><p><a href=https://docs.docker.com/engine/install/centos/#install-using-the-convenience-script>https://docs.docker.com/engine/install/centos/#install-using-the-convenience-script</a></p><p>官方脚本安装docker</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><ul><li><a href=#linux-安装-docker>linux 安装 docker</a></li></ul></li></ul></nav><h2 id=linux-安装-docker>linux 安装 docker</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上。</p><p><img src=docker.png alt></p><p>安装参考：</p><p><a href=https://github.com/docker/docker-install>https://github.com/docker/docker-install</a>
+<a href=https://docs.docker.com/engine/install/centos/#install-using-the-convenience-script>https://docs.docker.com/engine/install/centos/#install-using-the-convenience-script</a></p><p>官方脚本安装docker</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 </code></pre></div><p>配置镜像加速</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p /etc/docker
 tee /etc/docker/daemon.json <span style=color:#f1fa8c>&lt;&lt;-&#39;EOF&#39;
 </span><span style=color:#f1fa8c>{
@@ -14,7 +15,11 @@ tee /etc/docker/daemon.json <span style=color:#f1fa8c>&lt;&lt;-&#39;EOF&#39;
 </span><span style=color:#f1fa8c>}
 </span><span style=color:#f1fa8c>EOF</span>
 </code></pre></div><p>启动docker服务</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>systemctl <span style=color:#8be9fd;font-style:italic>enable</span> --now docker
-</code></pre></div><p>运行docker容器</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run hello-world
+</code></pre></div><p>运行一个nginx docker容器</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run -d --name nginx <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --restart always <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -p 80:80 <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  nginx
+</code></pre></div><p>浏览器访问nginx页面</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>http://127.0.0.1:80
 </code></pre></div><div class="entry-shang text-center"><p>「真诚赞赏，手留余香」</p><button class="zs show-zs btn btn-bred">赞赏支持</button></div><div class=zs-modal-bg></div><div class=zs-modal-box><div class=zs-modal-head><button type=button class=close>×</button>
 <span class=author><a href=https://willzhang.github.io><img src=/img/favicon.png>Will Blog</a></span><p class=tip><i></i><span>真诚赞赏，手留余香</span></p></div><div class=zs-modal-body><div class=zs-modal-btns><button class="btn btn-blink" data-num=2>2元</button>
 <button class="btn btn-blink" data-num=5>5元</button>
