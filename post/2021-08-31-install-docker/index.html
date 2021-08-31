@@ -20,6 +20,23 @@ tee /etc/docker/daemon.json <span style=color:#f1fa8c>&lt;&lt;-&#39;EOF&#39;
 </span><span style=color:#f1fa8c></span>  -p 80:80 <span style=color:#f1fa8c>\
 </span><span style=color:#f1fa8c></span>  nginx
 </code></pre></div><p>浏览器访问nginx页面</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>http://127.0.0.1:80
+</code></pre></div><p>容器常用命令</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#6272a4># 查看所有容器，包括运行状态和非运行状态容器</span>
+docker ps -a
+
+<span style=color:#6272a4># 启动nginx容器</span>
+docker start nginx
+
+<span style=color:#6272a4># 停止nginx容器</span>
+docker stop nginx
+
+<span style=color:#6272a4># 重启nginx容器</span>
+docker restart nginx
+
+<span style=color:#6272a4># 查看容器运行日志</span>
+docker logs -f nginx
+
+<span style=color:#6272a4># 删除nginx容器，选项-f无需停止强制删除</span>
+docker rm -f nginx
 </code></pre></div><div class="entry-shang text-center"><p>「真诚赞赏，手留余香」</p><button class="zs show-zs btn btn-bred">赞赏支持</button></div><div class=zs-modal-bg></div><div class=zs-modal-box><div class=zs-modal-head><button type=button class=close>×</button>
 <span class=author><a href=https://willzhang.github.io><img src=/img/favicon.png>Will Blog</a></span><p class=tip><i></i><span>真诚赞赏，手留余香</span></p></div><div class=zs-modal-body><div class=zs-modal-btns><button class="btn btn-blink" data-num=2>2元</button>
 <button class="btn btn-blink" data-num=5>5元</button>
