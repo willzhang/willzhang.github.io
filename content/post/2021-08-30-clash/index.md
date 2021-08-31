@@ -1,4 +1,15 @@
-clash简介
+---
+title:      "clash安装使用教程"
+subtitle:   "clash安装使用教程subtitle"
+description: "Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。"
+author:     "will"
+date:       2021-08-30
+tags:
+    - vpn
+categories: [ VPN ]
+image: "https://img.zhaohuabing.com/in-post/2018-06-02-istio08/background.jpg"
+---
+## clash简介
 
 Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。
 Clash分为开源版本与闭源版本（Premium版）：
