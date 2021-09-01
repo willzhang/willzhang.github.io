@@ -12,6 +12,8 @@ image: "img/Statue-of-Liberty.jpeg"
 
 ## clash简介
 
+![Albert-Einstein](https://raw.githubusercontent.com/willzhang/images/main/img/Albert-Einstein.jpg)
+
 Clash 是一个基于规则的跨平台代理软件核心程序，是一款用 Go开发的支持 Linux/MacOS/Windows等多平台的代理工具，Clash支持 Vmess, Shadowsocks, Snell , SOCKS5 , ShadowsocksR协议，支持规则分流。
 Clash分为开源版本与闭源版本（Premium版）：
 闭源版本（Premium版）比开源版本多以下功能：TUN、Script（脚本模式）、Rule Providers。
