@@ -1,0 +1,55 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Will Blog"><meta property="og:type" content="article"><meta property="og:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta property="twitter:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta name=title content="在 Win10 中安装 Vue-Cli"><meta property="og:title" content="在 Win10 中安装 Vue-Cli"><meta property="twitter:title" content="在 Win10 中安装 Vue-Cli"><meta name=description content="本文演示如何在 Window 10 中安装 Vue 命令行工具 (Vue-Cli)。"><meta property="og:description" content="本文演示如何在 Window 10 中安装 Vue 命令行工具 (Vue-Cli)。"><meta property="twitter:description" content="本文演示如何在 Window 10 中安装 Vue 命令行工具 (Vue-Cli)。"><meta property="twitter:card" content="summary"><meta name=keyword content="will, willzhang, will的网络日志, will的博客, will Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>在 Win10 中安装 Vue-Cli-will的博客 | Will Blog</title><link rel=canonical href=/post/windows10-install-vuecli/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Will Blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/frontend>frontend</a></li><li><a href=/categories/vpn>vpn</a></li><li><a href=/top/books/>BOOKS</a></li><li><a href=/top/archive/>ARCHIVE</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/Statue-of-Liberty.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/frontend title=frontend>frontend</a></div><h1>在 Win10 中安装 Vue-Cli</h1><h2 class=subheading>在 Win10 中安装 Vue-Cli</h2><span class=meta>Posted by
+will
+on
+Saturday, September 4, 2021</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><ul><li><a href=#在-win10-中安装-vue-cli>在 Win10 中安装 Vue-Cli</a></li><li><a href=#用-yarn-安装>用 Yarn 安装</a></li><li><a href=#配置环境变量>配置环境变量</a></li></ul></li></ul></nav><h2 id=在-win10-中安装-vue-cli>在 Win10 中安装 Vue-Cli</h2><p>本文演示如何在 Window 10 中安装 Vue 命令行工具 (Vue-Cli)。</p><p>本文假设你已经在你的 Win10 中已经安装好了 node.js。 如果还没有安装，可以参考 <a href=https://www.mls-tech.info/node/node-nvm-switch-version/>使用nvm切换Node的不同版本(Windows)</a>, 安装好 node 和 yarn。 接下来，我们用 yarn 来安装 Vue-Cli。</p><h2 id=用-yarn-安装>用 Yarn 安装</h2><p>首先打开命令行或 Windows Terminal, 执行:</p><p>Copy</p><pre><code>yarn global add @vue/cli
+</code></pre><p>依赖于网络的速度，最终安装好后，系统出现类似信息:</p><p>Copy</p><pre><code>yarn global v1.22.4
+[1/4] Resolving packages...
+warning @vue/cli &gt; @vue/cli-shared-utils &gt; request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+warning @vue/cli &gt; @vue/cli-ui &gt; vue-cli-plugin-apollo &gt; nodemon &gt; chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+warning @vue/cli &gt; jscodeshift &gt; micromatch &gt; snapdragon &gt; source-map-resolve &gt; resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+warning @vue/cli &gt; jscodeshift &gt; micromatch &gt; snapdragon &gt; source-map-resolve &gt; urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+warning @vue/cli &gt; @vue/cli-ui &gt; vue-cli-plugin-apollo &gt; nodemon &gt; chokidar &gt; fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+[2/4] Fetching packages...
+info fsevents@1.2.13: The platform &quot;win32&quot; is incompatible with this module.
+info &quot;fsevents@1.2.13&quot; is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning &quot;@vue/cli &gt; jscodeshift@0.9.0&quot; has unmet peer dependency &quot;@babel/preset-env@^7.1.6&quot;.
+[4/4] Building fresh packages...
+success Installed &quot;@vue/cli@4.4.1&quot; with binaries:
+      - vue
+Done in 59.71s.
+</code></pre><h2 id=配置环境变量>配置环境变量</h2><p>执行:</p><p>Copy</p><pre><code>vue
+</code></pre><p>你会发现系统提示 vue 不是一个内部或外部命令。显然，我们还需要在环境变量 Path 中指定 vue 所在的路径（目录）。</p><p>执行:</p><p>Copy</p><pre><code>yarn global list
+</code></pre><p>查看当前在 yarn 中全局安装的组件, 系统显示:</p><p>Copy</p><pre><code>yarn global v1.22.4
+info &quot;@vue/cli@4.4.1&quot; has binaries:
+   - vue
+Done in 2.80s.
+</code></pre><p>也就是说 vue-cli 已经被安装了。问题肯定是出现在 path 环境变量上。</p><p>那怎么找到 Yarn 组件的全局安装路径呢？</p><p>执行:</p><p>Copy</p><pre><code>yarn global bin
+</code></pre><p>系统显示（这是在我的环境中的路径，你的可能会不一样）:</p><p>Copy</p><pre><code>C:\Users\stu\AppData\Local\Yarn\bin
+</code></pre><p>打开这个目录，可以看到 vue 脚本命令，现在只需要在环境变量 path 中增加该目录即可。</p><p>增加之后，重新打开一个 cmd 或 Windows Terminal, 就可以执行 vue 了 。比如执行:</p><p>Copy</p><pre><code>vue --version
+</code></pre><p>系统显示:</p><p>Copy</p><pre><code>@vue/cli 4.4.1
+</code></pre><p>接下来，就可以愉快的使用 vue-cli 了。</p><div class="entry-shang text-center"><p>「真诚赞赏，手留余香」</p><button class="zs show-zs btn btn-bred">赞赏支持</button></div><div class=zs-modal-bg></div><div class=zs-modal-box><div class=zs-modal-head><button type=button class=close>×</button>
+<span class=author><a href=https://willzhang.github.io><img src=/img/favicon.png>Will Blog</a></span><p class=tip><i></i><span>真诚赞赏，手留余香</span></p></div><div class=zs-modal-body><div class=zs-modal-btns><button class="btn btn-blink" data-num=2>2元</button>
+<button class="btn btn-blink" data-num=5>5元</button>
+<button class="btn btn-blink" data-num=10>10元</button>
+<button class="btn btn-blink" data-num=50>50元</button>
+<button class="btn btn-blink" data-num=100>100元</button>
+<button class="btn btn-blink" data-num=1>任意金额</button></div><div class=zs-modal-pay><button class="btn btn-bred" id=pay-text>2元</button><p>使用<span id=pay-type>微信</span>扫描二维码完成支付</p><img src=/img/reward/wechat-2.png id=pay-image></div></div><div class=zs-modal-footer><label><input type=radio name=zs-type value=wechat class=zs-type checked><span><span class=zs-wechat><img src=/img/reward/wechat-btn.png></span></label>
+<label><input type=radio name=zs-type value=alipay class=zs-type class=zs-alipay><img src=/img/reward/alipay-btn.png></span></label></div></div><script type=text/javascript src=/js/reward.js></script><hr><ul class=pager><li class=previous><a href=/post/install-shadowsocks/ data-toggle=tooltip data-placement=top title=docker安装shadowsocks>&larr;
+Previous Post</a></li></ul><div id=disqus-comment></div></div><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/vpn title=vpn>vpn</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://willzhang.github.com>will的博客</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href rel=alternate type=application/rss+xml title="Will Blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a href=mailto:youremail@gmail.com><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=/your%20wechat%20qr%20code%20image><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-weixin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/yourgithub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/yourlinkedinid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/yourstackoverflowid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Will Blog 2021<br>Theme by <a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a>
+<span style="display:inline-block;margin:0 5px"><i class="fa fa-heart"></i></span>
+Publish by <a href=https://x.topthink.com/books>x.topthink</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script></body></html>
