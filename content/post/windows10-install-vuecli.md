@@ -5,7 +5,7 @@ description: "本文演示如何在 Window 10 中安装 Vue 命令行工具 (Vue
 author:     "will"
 date:       2021-09-05
 tags:
-    - vpn
+    - frontend
 categories: [ frontend ]
 image: "img/Statue-of-Liberty.jpeg"
 ---
