@@ -1,0 +1,139 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Will Blog"><meta property="og:type" content="article"><meta property="og:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta property="twitter:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta name=title content="使用 GitLab CI 与 Argo CD 实践 GitOps"><meta property="og:title" content="使用 GitLab CI 与 Argo CD 实践 GitOps"><meta property="twitter:title" content="使用 GitLab CI 与 Argo CD 实践 GitOps"><meta name=description content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="og:description" content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="twitter:description" content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="twitter:card" content="summary"><meta name=keyword content="will, willzhang, will的网络日志, will的博客, will Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>使用 GitLab CI 与 Argo CD 实践 GitOps-will的博客 | Will Blog</title><link rel=canonical href=/post/argocd-gitlab/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Will Blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/frontend>frontend</a></li><li><a href=/categories/tech>tech</a></li><li><a href=/categories/vpn>vpn</a></li><li><a href=/top/books/>BOOKS</a></li><li><a href=/top/archive/>ARCHIVE</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/Statue-of-Liberty.jpeg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/kubernetes title=kubernetes>kubernetes</a></div><h1>使用 GitLab CI 与 Argo CD 实践 GitOps</h1><h2 class=subheading></h2><span class=meta>Posted by
+Will Blog
+on
+Monday, January 1, 0001</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><ul><li><a href=#argocd简介>argocd简介</a></li><li><a href=#helm部署argocd>helm部署argocd</a></li><li><a href=#部署gitlabci>部署gitlabCI</a></li><li><a href=#通过ui创建应用>通过UI创建应用</a></li></ul></li></ul></nav><h2 id=argocd简介>argocd简介</h2><p>Argo CD是用于Kubernetes的声明性GitOps持续交付工具，遵循GitOps模式，该模式使用Git仓库作为定义所需应用程序状态的真实来源。</p><p>Argo CD可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在Git提交时跟踪对分支，标签的更新，或固定到清单的特定版本。</p><p>argoCD支持的Kubernetes 配置清单包括helm charts、kustomize或纯YAML/json文件等。</p><h2 id=helm部署argocd>helm部署argocd</h2><p>参考：</p><p><a href=https://artifacthub.io/packages/helm/argo/argo-cd>https://artifacthub.io/packages/helm/argo/argo-cd</a></p><p><a href=https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd>https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd</a></p><p>添加helm仓库</p><pre><code>helm repo add argo https://argoproj.github.io/argo-helm
+</code></pre><p>部署argocd</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm install argocd argo/argo-cd <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --namespace<span style=color:#ff79c6>=</span>argocd --create-namespace <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set global.image.repository<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;argoproj/argocd&#34;</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set dex.image.repository<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;dexidp/dex&#34;</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set server.service.type<span style=color:#ff79c6>=</span>NodePort <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set server.service.nodePortHttp<span style=color:#ff79c6>=</span><span style=color:#bd93f9>30085</span> <span style=color:#f1fa8c>\
+</span></code></pre></div><p>获取admin用户密码</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n argocd get secret argocd-initial-admin-secret -o <span style=color:#8be9fd;font-style:italic>jsonpath</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;{.data.password}&#34;</span> | base64 -d
+</code></pre></div><h2 id=部署gitlabci>部署gitlabCI</h2><p>安装gitlab</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run -d --name gitlab <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --restart always <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --hostname gitlab.prod.cloudcele.com <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -p 8929:8929 -p 2289:22 <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -e <span style=color:#8be9fd;font-style:italic>GITLAB_OMNIBUS_CONFIG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;external_url &#39;http://gitlab.prod.cloudcele.com:8929&#39;; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2289; gitlab_rails[&#39;initial_root_password&#39;] = &#39;Gitlab@123&#39;;&#34;</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -v /data/gitlab/config:/etc/gitlab <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -v /data/gitlab/logs:/var/log/gitlab <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  -v /data/gitlab/data:/var/opt/gitlab <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  gitlab/gitlab-ce:14.1.5-ce.0
+</code></pre></div><p>安装gitlab-runner</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm install gitlab-runner <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --namespace<span style=color:#ff79c6>=</span>gitlab-runner <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --create-namespace <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --version<span style=color:#ff79c6>=</span>0.31.0 <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set <span style=color:#8be9fd;font-style:italic>image</span><span style=color:#ff79c6>=</span>gitlab/gitlab-runner:alpine-v14.1.0 <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set runners.helpers.image<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;gitlab/gitlab-runner-helper:x86_64-8925d9a0&#34;</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set <span style=color:#8be9fd;font-style:italic>gitlabUrl</span><span style=color:#ff79c6>=</span>http://10.0.0.5:8929 <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set <span style=color:#8be9fd;font-style:italic>runnerRegistrationToken</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;3XxYzq83EhVigW6SAw8Y&#34;</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set rbac.create<span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set rbac.clusterWideAccess<span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set <span style=color:#8be9fd;font-style:italic>privileged</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set runners.name<span style=color:#ff79c6>=</span>k8s-helm-runner <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set runners.tags<span style=color:#ff79c6>=</span>k8s-runner <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  --set runners.runUntagged<span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span> <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>  gitlab/gitlab-runner
+</code></pre></div><p>创建gitlab仓库</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>stages:
+- build
+- deploy
+
+variables:
+  CI_REGISTRY_IMAGE: local.registry.cloudcele.com:9080/library/nginx
+  CI_USERNAME: root
+  CI_PASSWORD: Gitlab%40123
+
+build:
+  stage: build
+  image:
+    name: local.registry.cloudcele.com:9080/library/kaniko-executor:debug
+    entrypoint: <span style=color:#ff79c6>[</span><span style=color:#f1fa8c>&#34;&#34;</span><span style=color:#ff79c6>]</span>
+  script:
+    - mkdir -p /kaniko/.docker
+    - <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;10.0.0.5 local.registry.cloudcele.com&#34;</span> &gt;&gt; /etc/hosts
+    - <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#34;{\&#34;auths\&#34;:{\&#34;local.registry.cloudcele.com:9080\&#34;:{\&#34;auth\&#34;:\&#34;</span><span style=color:#ff79c6>$(</span><span style=color:#8be9fd;font-style:italic>echo</span> -n admin:Harbor12345 | base64<span style=color:#ff79c6>)</span><span style=color:#f1fa8c>\&#34;}}}&#34;</span> &gt; /kaniko/.docker/config.json
+    - /kaniko/executor --insecure --context <span style=color:#8be9fd;font-style:italic>$CI_PROJECT_DIR</span> --dockerfile <span style=color:#8be9fd;font-style:italic>$CI_PROJECT_DIR</span>/Dockerfile --destination <span style=color:#8be9fd;font-style:italic>$CI_REGISTRY_IMAGE</span>:<span style=color:#8be9fd;font-style:italic>$CI_COMMIT_SHORT_SHA</span>
+
+deploy:
+  stage: deploy
+  image: cnych/kustomize:v1.0
+  before_script:
+    - git remote set-url origin http://<span style=color:#f1fa8c>${</span><span style=color:#8be9fd;font-style:italic>CI_USERNAME</span><span style=color:#f1fa8c>}</span>:<span style=color:#f1fa8c>${</span><span style=color:#8be9fd;font-style:italic>CI_PASSWORD</span><span style=color:#f1fa8c>}</span>@gitlab.prod.cloudcele.com:8929/root/nginx-demo.git
+    - git config --global user.email <span style=color:#f1fa8c>&#34;gitlab@git.k8s.local&#34;</span>
+    - git config --global user.name <span style=color:#f1fa8c>&#34;GitLab CI/CD&#34;</span>
+  script:
+    - git checkout -B master
+    - <span style=color:#8be9fd;font-style:italic>cd</span> deployment/
+    - kustomize edit <span style=color:#8be9fd;font-style:italic>set</span> image <span style=color:#8be9fd;font-style:italic>$CI_REGISTRY_IMAGE</span>:<span style=color:#8be9fd;font-style:italic>$CI_COMMIT_SHORT_SHA</span>
+    - cat kustomization.yaml
+    - git commit -am <span style=color:#f1fa8c>&#39;DEV image update&#39;</span>
+    - git push -o ci.skip origin master
+  only:
+    - master
+</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#ff79c6>apiVersion</span>: apps/v1
+<span style=color:#ff79c6>kind</span>: Deployment
+<span style=color:#ff79c6>metadata</span>:
+  <span style=color:#ff79c6>name</span>: nginx
+  <span style=color:#ff79c6>namespace</span>: apps
+<span style=color:#ff79c6>spec</span>:
+  <span style=color:#ff79c6>selector</span>:
+    <span style=color:#ff79c6>matchLabels</span>:
+      <span style=color:#ff79c6>app</span>: nginx
+  <span style=color:#ff79c6>replicas</span>: <span style=color:#bd93f9>2</span>
+  <span style=color:#ff79c6>template</span>:
+    <span style=color:#ff79c6>metadata</span>:
+      <span style=color:#ff79c6>labels</span>:
+        <span style=color:#ff79c6>app</span>: nginx
+    <span style=color:#ff79c6>spec</span>:
+      <span style=color:#ff79c6>containers</span>:
+      - <span style=color:#ff79c6>name</span>: nginx
+        <span style=color:#ff79c6>image</span>: local.registry.cloudcele.com:9080/library/nginx:latest
+        <span style=color:#ff79c6>ports</span>:
+        - <span style=color:#ff79c6>containerPort</span>: <span style=color:#bd93f9>80</span>
+---
+<span style=color:#ff79c6>apiVersion</span>: v1
+<span style=color:#ff79c6>kind</span>: Service
+<span style=color:#ff79c6>metadata</span>:
+  <span style=color:#ff79c6>name</span>: nginx-service
+  <span style=color:#ff79c6>namespace</span>: apps
+  <span style=color:#ff79c6>labels</span>:
+    <span style=color:#ff79c6>app</span>: nginx
+<span style=color:#ff79c6>spec</span>:
+  <span style=color:#ff79c6>type</span>: NodePort
+  <span style=color:#ff79c6>ports</span>:
+  - <span style=color:#ff79c6>port</span>: <span style=color:#bd93f9>80</span>
+    <span style=color:#ff79c6>protocol</span>: TCP
+    <span style=color:#ff79c6>targetPort</span>: <span style=color:#bd93f9>80</span>
+    <span style=color:#ff79c6>nodePort</span>: <span style=color:#bd93f9>30080</span>
+  <span style=color:#ff79c6>selector</span>:
+    <span style=color:#ff79c6>app</span>: nginx
+</code></pre></div><pre><code>apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+</code></pre><pre><code>FROM nginx
+COPY index.html /usr/share/nginx/html/
+</code></pre><h2 id=通过ui创建应用>通过UI创建应用</h2><p>参考：https://argoproj.github.io/argo-cd/getting_started</p><p>1、添加Repositories</p><p>2、创建Applications</p><div class="entry-shang text-center"><p>「真诚赞赏，手留余香」</p><button class="zs show-zs btn btn-bred">赞赏支持</button></div><div class=zs-modal-bg></div><div class=zs-modal-box><div class=zs-modal-head><button type=button class=close>×</button>
+<span class=author><a href=https://willzhang.github.io><img src=/img/favicon.png>Will Blog</a></span><p class=tip><i></i><span>真诚赞赏，手留余香</span></p></div><div class=zs-modal-body><div class=zs-modal-btns><button class="btn btn-blink" data-num=2>2元</button>
+<button class="btn btn-blink" data-num=5>5元</button>
+<button class="btn btn-blink" data-num=10>10元</button>
+<button class="btn btn-blink" data-num=50>50元</button>
+<button class="btn btn-blink" data-num=100>100元</button>
+<button class="btn btn-blink" data-num=1>任意金额</button></div><div class=zs-modal-pay><button class="btn btn-bred" id=pay-text>2元</button><p>使用<span id=pay-type>微信</span>扫描二维码完成支付</p><img src=/img/reward/wechat-2.png id=pay-image></div></div><div class=zs-modal-footer><label><input type=radio name=zs-type value=wechat class=zs-type checked><span><span class=zs-wechat><img src=/img/reward/wechat-btn.png></span></label>
+<label><input type=radio name=zs-type value=alipay class=zs-type class=zs-alipay><img src=/img/reward/alipay-btn.png></span></label></div></div><script type=text/javascript src=/js/reward.js></script><hr><ul class=pager><li class=next><a href=/post/summary/ data-toggle=tooltip data-placement=top title>Next
+Post &rarr;</a></li></ul><div id=disqus-comment></div></div><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/vpn title=vpn>vpn</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://willzhang.github.com>will的博客</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href rel=alternate type=application/rss+xml title="Will Blog"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a href=mailto:youremail@gmail.com><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=/your%20wechat%20qr%20code%20image><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-weixin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/yourgithub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/yourlinkedinid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/yourstackoverflowid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Will Blog 2021<br>Theme by <a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a>
+<span style="display:inline-block;margin:0 5px"><i class="fa fa-heart"></i></span>
+Publish by <a href=https://x.topthink.com/books>x.topthink</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script></body></html>
