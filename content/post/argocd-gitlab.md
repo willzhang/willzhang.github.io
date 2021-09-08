@@ -3,6 +3,7 @@ title: "使用 GitLab CI 与 Argo CD 实践 GitOps"
 tags:
     - kubernetes
 categories: [ TECH ]
+date:       2021-09-08
 image: "img/Statue-of-Liberty.jpeg"
 ---
 
