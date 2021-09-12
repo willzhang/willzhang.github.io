@@ -1,5 +1,5 @@
 baseurl = "https://willzhang.github.io"
-title = "Will Blog"
+title = "WillBlog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
@@ -14,7 +14,7 @@ home = ["HTML", "RSS", "Algolia"]
 
 [params]
   header_image = "img/home-bg-jeep.jpg"
-  SEOTitle = "will的博客 | Will Blog"
+  SEOTitle = "will的博客 | WillBlog"
   description = "will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"
   keyword = "will, willzhang, will的网络日志, will的博客, will Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"
   slogan = "路在脚下，心向远方"
