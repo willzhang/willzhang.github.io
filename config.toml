@@ -3,7 +3,7 @@ title = "Will Blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
-disqusShortname = "disqus_XCguhwJmIH"
+disqusShortname = "willdis"
 googleAnalytics = "UA-136782518-3"
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
