@@ -1,0 +1,513 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="WillBlog"><meta property="og:type" content="article"><meta property="og:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta property="twitter:image" content="https://willzhang.github.io/img/home-bg-jeep.jpg"><meta name=title content><meta property="og:title" content><meta property="twitter:title" content><meta name=description content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="og:description" content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="twitter:description" content="will，程序员, 开源爱好者，生活探险家 | 这里是 will 的博客，与你一起发现更大的世界。"><meta property="twitter:card" content="summary"><meta name=keyword content="will, willzhang, will的网络日志, will的博客, will Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice"><link rel="shortcut icon" href=/img/favicon.ico><title>will的博客 | WillBlog</title><link rel=canonical href=/post/rhce/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>WillBlog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/frontend>frontend</a></li><li><a href=/categories/tech>tech</a></li><li><a href=/categories/vpn>vpn</a></li><li><a href=/top/books/>BOOKS</a></li><li><a href=/top/archive/>ARCHIVE</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/home-bg-jeep.jpg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags></div><h1></h1><h2 class=subheading></h2><span class=meta>Posted by
+WillBlog
+on
+Monday, January 1, 0001</span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><ul><li><a href=#考试环境>考试环境</a></li><li><a href=#考试题目>考试题目</a></li></ul></li></ul></nav><p><strong>RHCE满分300分，210分即通过，时间4小时（下午）。</strong></p><p><strong>参考：</strong><a href=https://chowdera.com/2022/02/202202220450472345.html>https://chowdera.com/2022/02/202202220450472345.html</a></p><p>/usr/share/ansible/roles
+/usr/share/doc/rhel-system-roles/</p><h2 id=考试环境>考试环境</h2><p><strong>重要配置信息</strong>
+在考试期间，除了您就坐位置的台式机之外，还将使用多个虚拟系统。您不具有台式机系统的 root 访问权，但具有对虚拟系统的完整 root 访问权。
+<strong>系统信息</strong>
+在本考试期间，您将操作下列虚拟系统：
+<img src="https://cdn.nlark.com/yuque/0/2022/png/247390/1653464993702-81c49811-8e6f-4c9a-a940-95bfba3387e5.png#clientId=u62b316b0-7c41-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=ua7836a3e&margin=%5Bobject%20Object%5D&originHeight=229&originWidth=704&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u77139407-a73d-4a98-90ea-080583f18b7&title=" alt>
+这些系统的 IP 地址采用静态设置。请勿更改这些设置。
+主机名称解析已配置为解析上方列出的完全限定主机名，同时也解析主机短名称。
+<strong>帐户信息</strong>
+所有系统的 root 密码是 flectrag。
+请勿更改 root 密码。除非另有指定，否则这将是用于访问其他系统和服务的密码。此外，除非另有指定，否则此密码也应用于您创建的所有帐户，或者任何需要设置密码的服务。
+为方便起见，所有系统上已预装了 SSH 密钥，允许在不输入密码的前提下通过 SSH 进行 root 访问。请勿对系统上的 root SSH 配置文件进行任何修改。
+Ansible 控制节点上已创建了用户帐户 greg。此帐户预装了 SSH 密钥，允许在 Ansible 控制节点和各个 Ansible 受管节点之间进行 SSH 登录。请勿对系统上的 greg SSH 配置文件进行任何修改。您可以从 root 帐户使用 su 访问此用户帐户。
+<strong>重要信息</strong>
+除非另有指定，否则您的所有工作（包括 Ansible playbook、配置文件和主机清单等）应当保存在控制节点上的目录 /home/greg/ansible 中，并且应当归 greg 用户所有。所有 Ansible 相关的命令应当由 greg 用户从 Ansible 控制节点上的这个目录运行。
+<strong>其他信息</strong>
+一些考试项目可能需要修改 Ansible 主机清单。您要负责确保所有以前的清单组和项目保留下来，与任何其他更改共存。您还要有确保清单中所有默认的组和主机保留您进行的任何更改。
+考试系统上的防火墙默认为不启用，SELinux 则处于强制模式。
+如果需要安装其他软件，您的物理系统和 Ansible 控制节点可能已设置为指向 content 上的下述存储库：
+http://content/rhel8.0/x86_64/dvd/BaseOS
+http://content/rhel8.0/x86_64/dvd/AppStream
+一些项目需要额外的文件，这些文件已在以下位置提供：
+http://materials
+产品文档可从以下位置找到：
+http://materials/docs/ansible/html
+其他资源也进行了配置，供您在考试期间使用。关于这些资源的具体信息将在需要这些资源的项目中提供。
+<strong>重要信息</strong>
+请注意，在评分之前，您的 Ansible 受管节点系统将重置为考试开始时的初始状态，您编写的 Ansible playbook 将通过以 greg 用户身份从控制节点上的目录 /home/greg/ansible 目录运行来应用。在 playbook 运行后，系统会对您的受管节点进行评估，以判断它们是否按照规定进行了配置。</p><h2 id=考试题目>考试题目</h2><h3 id=1安装和配置-ansible>1、安装和配置 Ansible</h3><p>按照下方所述，在控制节点 172.25.250.254 上安装和配置 Ansible：
+安装所需的软件包
+创建名为 /home/greg/ansible/inventory 的静态清单文件，以满足以下要求：
+172.25.250.9 是 dev 主机组的成员
+172.25.250.10 是 test 主机组的成员
+172.25.250.11 和 172.25.250.12 是 prod 主机组的成员
+172.25.250.13 是 balancers 主机组的成员
+prod 组是 webservers 主机组的成员
+创建名为 /home/greg/ansible/ansible.cfg 的配置文件，以满足以下要求：
+主机清单文件为 /home/greg/ansible/inventory
+playbook 中使用的角色的位置包括 /home/greg/ansible/roles
+解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ~<span style=color:#ff79c6>]</span>$ sudo dnf install -y ansible
+<span style=color:#ff79c6>[</span>greg@bastion ~<span style=color:#ff79c6>]</span>$ mkdir -p /home/greg/ansible
+<span style=color:#ff79c6>[</span>greg@bastion ~<span style=color:#ff79c6>]</span>$ <span style=color:#8be9fd;font-style:italic>cd</span> /home/greg/ansible
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim inventory
+<span style=color:#ff79c6>[</span>dev<span style=color:#ff79c6>]</span>
+172.25.250.9
+<span style=color:#ff79c6>[</span>test<span style=color:#ff79c6>]</span>
+172.25.250.10
+<span style=color:#ff79c6>[</span>prod<span style=color:#ff79c6>]</span>
+172.25.250.11
+172.25.250.12
+<span style=color:#ff79c6>[</span>balancers<span style=color:#ff79c6>]</span>
+172.25.250.13
+<span style=color:#ff79c6>[</span>webservers:children<span style=color:#ff79c6>]</span>
+prod
+<span style=color:#ff79c6>[</span>all:vars<span style=color:#ff79c6>]</span>
+<span style=color:#8be9fd;font-style:italic>ansible_user</span><span style=color:#ff79c6>=</span>root
+<span style=color:#8be9fd;font-style:italic>ansible_password</span><span style=color:#ff79c6>=</span>redhat
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ cp /etc/ansible/ansible.cfg ./
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ mkdir roles
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim /home/greg/ansible/ansible.cfg
+<span style=color:#6272a4>#总共只修改四行</span>
+<span style=color:#8be9fd;font-style:italic>inventory</span> <span style=color:#ff79c6>=</span> /home/greg/ansible/inventory
+<span style=color:#8be9fd;font-style:italic>roles_path</span> <span style=color:#ff79c6>=</span> /home/greg/ansible/roles
+<span style=color:#8be9fd;font-style:italic>host_key_checking</span> <span style=color:#ff79c6>=</span> False
+<span style=color:#8be9fd;font-style:italic>remote_user</span> <span style=color:#ff79c6>=</span> root
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible --version
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible-inventory --graph
+</code></pre></div><h3 id=2创建和运行-ansible-临时命令>2、创建和运行 Ansible 临时命令</h3><p>作为系统管理员，您需要在受管节点上安装软件。
+请按照正文所述，创建一个名为 /home/greg/ansible/adhoc.sh 的 shell 脚本，该脚本将使用 Ansible 临时命令在各个受管节点上安装 yum 存储库：
+存储库1：</p><ul><li>存储库的名称为 EX294_BASE</li><li>描述为 EX294 base software</li><li>基础 URL 为 http://content/rhel8.0/x86_64/dvd/BaseOS</li><li>GPG 签名检查为启用状态</li><li>GPG 密钥 URL 为 http://content/rhel8.0/x86_64/dvd/RPM-GPG-KEY-redhat-release</li><li>存储库为启用状态</li></ul><p>存储库2：</p><ul><li>存储库的名称为 EX294_STREAM</li><li>描述为 EX294 stream software</li><li>基础 URL 为 http://content/rhel8.0/x86_64/dvd/AppStream</li><li>GPG 签名检查为启用状态</li><li>GPG 密钥 URL 为 http://content/rhel8.0/x86_64/dvd/RPM-GPG-KEY-redhat-release</li><li>存储库为启用状态</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible-doc yum_repository
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim adhoc.sh
+<span style=color:#6272a4>#!/bin/bash</span>
+ansible all -m yum_repository -a <span style=color:#f1fa8c>&#39;name=&#34;EX294_BASE&#34; description=&#34;EX294 base software&#34; baseurl=&#34;http://content/rhel8.0/x86_64/dvd/BaseOS&#34; gpgcheck=yes enabled=yes gpgkey=&#34;http://content/rhel8.0/x86_64/dvd/RPM-GPG-KEY-redhat-release&#34;&#39;</span>
+ansible all -m yum_repository -a <span style=color:#f1fa8c>&#39;name=&#34;EX294_STREAM&#34; description=&#34;EX294 stream software&#34; baseurl=&#34;http://content/rhel8.0/x86_64/dvd/AppStream&#34; gpgcheck=yes enabled=yes gpgkey=&#34;http://content/rhel8.0/x86_64/dvd/RPM-GPG-KEY-redhat-release&#34;&#39;</span>
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ chmod +x adhoc.sh
+</code></pre></div><h3 id=3安装软件包>3、安装软件包</h3><p>安装软件包
+创建一个名为 /home/greg/ansible/packages.yml 的 playbook :</p><ul><li>将 php 和 mariadb 软件包安装到 dev、test 和 prod 主机组中的主机上</li><li>将 RPM Development Tools 软件包组安装到 dev 主机组中的主机上</li><li>将 dev 主机组中主机上的所有软件包更新为最新版本</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+- <span style=color:#ff79c6>name</span>: install packages
+  <span style=color:#ff79c6>hosts</span>: dev,test,prod
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: install php
+      <span style=color:#ff79c6>yum</span>:
+        <span style=color:#ff79c6>name</span>: php
+        <span style=color:#ff79c6>state</span>: present
+    - <span style=color:#ff79c6>name</span>: install mariadb
+      <span style=color:#ff79c6>yum</span>:
+        <span style=color:#ff79c6>name</span>: mariadb
+        <span style=color:#ff79c6>state</span>: present
+- <span style=color:#ff79c6>name</span>: install dev tools and update all
+  <span style=color:#ff79c6>hosts</span>: dev
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: install rpm dev tools
+      <span style=color:#ff79c6>yum</span>:
+        <span style=color:#ff79c6>name</span>: <span style=color:#f1fa8c>&#34;@RPM Development Tools&#34;</span>
+        <span style=color:#ff79c6>state</span>: present
+    - <span style=color:#ff79c6>name</span>: update all packages
+      <span style=color:#ff79c6>yum</span>:
+        <span style=color:#ff79c6>name</span>: <span style=color:#f1fa8c>&#34;*&#34;</span>
+        <span style=color:#ff79c6>state</span>: latest
+</code></pre></div><h3 id=4使用-rhel-系统角色>4、使用 RHEL 系统角色</h3><p>安装 RHEL 系统角色软件包，并创建符合以下条件的 playbook /home/greg/ansible/timesync.yml ：</p><ul><li>在所有受管节点上运行</li><li>使用 timesync 角色</li><li>配置该角色，以使用当前有效的 NTP 提供商</li><li>配置该角色，以使用时间服务器 172.25.254.254</li><li>配置该角色，以启用 iburst 参数</li></ul><p>解题方法：</p><pre><code>[greg@bastion ansible]$ sudo yum install rhel-system-roles
+[greg@bastion ansible]$ vim ansible.cfg
+#仅修改一行
+roles_path = /home/greg/ansible/roles:/usr/share/ansible/roles
+
+[greg@bastion ansible]$ ansible-galaxy list
+[greg@bastion ansible]$ cp /usr/share/doc/rhel-system-roles/timesync/example-timesync-playbook.yml timesync.yml
+
+[greg@bastion ansible]$ vim timesync.yml
+---
+- hosts: all
+  vars:
+    timesync_ntp_servers:
+      - hostname: 172.25.254.254
+        iburst: yes
+  roles:
+    - rhel-system-roles.timesync
+</code></pre><h3 id=5使用-ansible-galaxy-安装角色>5、使用 Ansible Galaxy 安装角色</h3><p>使用 Ansible Galaxy 和要求文件 /home/greg/ansible/roles/requirements.yml 。从以下 URL 下载角色并安装到 /home/greg/ansible/roles ：</p><ul><li>http://materials/haproxy.tar 此角色的名称应当为 balancer</li><li>http://materials/phpinfo.tar 此角色的名称应当为 phpinfo</li></ul><p>解题方法：</p><pre><code>[greg@bastion ansible]$ mkdir roles
+[greg@bastion ansible]$ cd roles
+[greg@bastion roles]$ vim requirements.yml
+---
+ name: balancer
+  src: http://materials/haproxy.tar
+- name: phpinfo
+  src: http://materials/phpinfo.tar
+  
+[greg@bastion ansible]$ ansible-galaxy install -r /home/greg/ansible/roles/requirements.yml -p /home/greg/ansible/roles
+</code></pre><h3 id=6创建和使用角色>6、创建和使用角色</h3><p>根据下列要求，在 /home/greg/ansible/roles 中创建名为 apache 的角色：</p><ul><li>httpd 软件包已安装，设为在系统启动时启用并启动</li><li>防火墙已启用并正在运行，并使用允许访问 Web 服务器的规则</li><li>模板文件 index.html.j2 已存在，用于创建具有以下输出的文件 /var/www/html/index.html ：Welcome to HOSTNAME on IPADDRESS。其中，HOSTNAME 是受管节点的完全限定域名，IPADDRESS 则是受管节点的 IP 地址。</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion roles]$ ansible-galaxy init apache
+[greg@bastion roles]$ vim apache/tasks/main.yml
+---
+- <span style=color:#ff79c6>name</span>: install httpd
+  <span style=color:#ff79c6>yum</span>:
+    <span style=color:#ff79c6>name</span>: httpd
+    <span style=color:#ff79c6>state</span>: present
+- <span style=color:#ff79c6>name</span>: start httpd service
+  <span style=color:#ff79c6>service</span>:
+    <span style=color:#ff79c6>name</span>: httpd
+    <span style=color:#ff79c6>state</span>: started
+    <span style=color:#ff79c6>enabled</span>: <span style=color:#ff79c6>yes</span>
+- <span style=color:#ff79c6>name</span>: start firewalld
+  <span style=color:#ff79c6>firewalld</span>:
+    <span style=color:#ff79c6>service</span>: http
+    <span style=color:#ff79c6>permanent</span>: <span style=color:#ff79c6>yes</span>
+    <span style=color:#ff79c6>state</span>: enabled
+    <span style=color:#ff79c6>immediate</span>: <span style=color:#ff79c6>yes</span>
+- <span style=color:#ff79c6>name</span>: cp files
+  <span style=color:#ff79c6>template</span>:
+    <span style=color:#ff79c6>src</span>: index.html.j2
+    <span style=color:#ff79c6>dest</span>: /var/www/html/index.html
+
+[greg@bastion roles]$ vim apache/templates/index.html.j2
+Welcome to {{ ansible_fqdn }} on {{ ansible_default_ipv4.address }}
+</code></pre></div><h3 id=7从-ansible-galaxy-使用角色>7、从 Ansible Galaxy 使用角色</h3><p>根据下列要求，创建一个名为 /home/greg/ansible/roles.yml 的 playbook ：</p><ul><li>playbook 中包含一个 play， 该 play 在 balancers 主机组中的主机上运行并将使用 balancer 角色。<ul><li>此角色配置一项服务，以在 webservers 主机组中的主机之间平衡 Web 服务器请求的负载。</li><li>浏览到 balancers 主机组中的主机（例如 http://172.25.250.13 ）将生成以下输出：Welcom to serverb.lab.example.com on 172.25.250.11</li><li>重新加载浏览器将从另一 Web 服务器生成输出：<code>Welcom to serverc.lab.example.com on 172.25.250.12</code></li></ul></li><li>playbook 中包含一个 play， 该 play 在 webservers 主机组中的主机上运行并将使用 phpinfo 角色。<ul><li>请通过 URL /hello.php 浏览到 webservers 主机组中的主机将生成以下输出：Hello PHP World from FQDN</li><li>其中，FQDN 是主机的完全限定名称。Hello PHP World from serverb.lab.example.com，另外还有 PHP 配置的各种详细信息，如安装的 PHP 版本等。</li></ul></li><li>同样，浏览到 http://172.25.250.12/hello.php 会生成以下输出：Hello PHP World from serverc.lab.example.com，另外还有 PHP 配置的各种详细信息，如安装的 PHP 版本等。</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim roles.yml
+---
+- <span style=color:#ff79c6>name</span>: install balancer role
+  <span style=color:#ff79c6>hosts</span>: balancers
+  <span style=color:#ff79c6>roles</span>:
+    - balancer
+- <span style=color:#ff79c6>name</span>: install phpinfo role
+  <span style=color:#ff79c6>hosts</span>: webservers
+  <span style=color:#ff79c6>roles</span>:
+    - phpinfo
+- <span style=color:#ff79c6>name</span>: install apache role
+  <span style=color:#ff79c6>hosts</span>: webservers
+  <span style=color:#ff79c6>roles</span>:
+    - apache
+</code></pre></div><h3 id=8创建和使用逻辑卷>8、创建和使用逻辑卷</h3><p>创建一个名为 /home/greg/ansible/lv.yml 的 playbook ，它将在所有受管节点上运行以执行下列任务：</p><ul><li>创建符合以下要求的逻辑卷：<ul><li>逻辑卷创建在 research 卷组中</li><li>逻辑卷名称为 data</li><li>逻辑卷大小为 1500 MiB</li></ul></li><li>使用 ext4 文件系统格式化逻辑卷</li><li>如果无法创建请求的逻辑卷大小，应显示错误信息Could not create logical volume of that size，并且应改为使用大小 800 MiB。</li><li>如果卷组 research 不存在，应显示错误信息Volume group done not exist。</li><li>不要以任何方式挂载逻辑卷</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim /home/greg/ansible/lv.yml
+---
+- <span style=color:#ff79c6>name</span>: create and use lvm
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: create and mk lvm
+      <span style=color:#ff79c6>block</span>: 
+        - <span style=color:#ff79c6>name</span>: create lvm
+          <span style=color:#ff79c6>lvol</span>:
+            <span style=color:#ff79c6>vg</span>: research
+            <span style=color:#ff79c6>lv</span>: data
+            <span style=color:#ff79c6>size</span>: 1500m
+        - <span style=color:#ff79c6>name</span>: filesystem
+          <span style=color:#ff79c6>filesystem</span>:
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>dev</span>: /dev/research/data
+      <span style=color:#ff79c6>rescue</span>:
+        - <span style=color:#ff79c6>debug</span>:
+            <span style=color:#ff79c6>msg</span>: <span style=color:#f1fa8c>&#39;Could not create logical volume of that size&#39;</span>
+        - <span style=color:#ff79c6>name</span>: create lvm new
+          <span style=color:#ff79c6>lvol</span>:
+            <span style=color:#ff79c6>vg</span>: research
+            <span style=color:#ff79c6>lv</span>: data
+            <span style=color:#ff79c6>size</span>: 800m
+          <span style=color:#ff79c6>when</span>: ansible_lvm.vgs.research is defined
+        - <span style=color:#ff79c6>name</span>: filesystem new
+          <span style=color:#ff79c6>filesystem</span>:
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>dev</span>: /dev/research/data
+          <span style=color:#ff79c6>when</span>: ansible_lvm.vgs.research is defined
+        - <span style=color:#ff79c6>debug</span>:
+            <span style=color:#ff79c6>msg</span>: <span style=color:#f1fa8c>&#34;Volume group does not exist&#34;</span>
+          <span style=color:#ff79c6>when</span>: ansible_lvm.vgs.research is undefined
+</code></pre></div><h3 id=9生成主机文件>9、生成主机文件</h3><p>生成主机文件</p><ul><li>将一个初始模板文件从 http://materials/hosts.j2 下载到 /home/greg/ansible</li><li>完成该模板，以便用它生成以下文件：针对每个清单主机包含一行内容，其格式与 /etc/hosts 相同</li><li>创建名为 /home/greg/ansible/hosts.yml 的 playbook ，它将使用此模板在 dev 主机组中的主机上生成文件 /etc/myhosts 。</li></ul><p>该 playbook 运行后， dev 主机组中主机上的文件 /etc/myhosts 应针对每个受管主机包含一行内容：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#bd93f9>127.0.0.1</span> localhost localhost.localdomain localhost4 localhost4.localdomain4
+::<span style=color:#bd93f9>1</span> localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+<span style=color:#bd93f9>172.25.250.9</span>    workstation.lab.example.com      workstation
+<span style=color:#bd93f9>172.25.250.10</span>   servera.lab.example.com servera
+<span style=color:#bd93f9>172.25.250.11</span>   serverb.lab.example.com serverb
+<span style=color:#bd93f9>172.25.250.12</span>   serverc.lab.example.com serverc
+<span style=color:#bd93f9>172.25.250.13</span>   serverd.lab.example.com serverd
+</code></pre></div><p>注：清单主机名称的显示顺序不重要。
+解题方法A：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ wget http://materials/hosts.j2
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim hosts.j2
+127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1 localhost localhost.localdomain localhost6 localhost6.localdomain6
+172.25.250.9    workstation.lab.example.com      workstation
+172.25.250.10   servera.lab.example.com servera
+172.25.250.11   serverb.lab.example.com serverb
+172.25.250.12   serverc.lab.example.com serverc
+172.25.250.13   serverd.lab.example.com serverd
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim hosts.yml
+---
+- name: 生成主机文件
+  hosts: dev
+  tasks:
+          - name: one
+            template:
+                    src: /home/greg/ansible/hosts.j2
+                    dest: /etc/myhosts
+</code></pre></div><p>解题方法B：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ wget http://materials/hosts.j2
+
+[greg@bastion ansible]$ vim hosts.j2
+<span style=color:#bd93f9>127.0.0.1</span> localhost localhost.localdomain localhost4 localhost4.localdomain4
+::<span style=color:#bd93f9>1</span> localhost localhost.localdomain localhost6 localhost6.localdomain
+{% for host in groups[&#39;all&#39;] %}
+{{ hostvars[host][&#39;ansible_facts&#39;][&#39;default_ipv4&#39;][&#39;address&#39;] }} {{ hostvars[host][&#39;ansible_facts&#39;][&#39;fqdn&#39;] }} {{ hostvars[host][&#39;ansible_facts&#39;][&#39;hostname&#39;] }}
+{% endfor %}
+
+[greg@bastion ansible]$ vim hosts.yml
+---
+- <span style=color:#ff79c6>name</span>: generate hosts file
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: template
+      <span style=color:#ff79c6>template</span>:
+        <span style=color:#ff79c6>src</span>: /home/greg/ansible/hosts.j2
+        <span style=color:#ff79c6>dest</span>: /etc/myhosts
+      <span style=color:#ff79c6>when</span>: <span style=color:#f1fa8c>&#39;inventory_hostname in groups.dev&#39;</span>
+</code></pre></div><h3 id=10修改文件内容>10、修改文件内容</h3><p>按照下方所述，创建一个名为 /home/greg/ansible/issue.yml 的 playbook ：</p><ul><li>该 playbook 将在所有清单主机上运行</li><li>该 playbook 会将 /etc/issue 的内容替换为下方所示的一行文本：<ul><li>在 dev 主机组中的主机上，这行文本显示 为：Development</li><li>在 test 主机组中的主机上，这行文本显示 为：Test</li><li>在 prod 主机组中的主机上，这行文本显示 为：Production</li></ul></li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim issue.yml
+---
+- <span style=color:#ff79c6>name</span>: change files content
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: copy dev
+      <span style=color:#ff79c6>copy</span>:
+        <span style=color:#ff79c6>content</span>: <span style=color:#f1fa8c>&#39;Development&#39;</span>
+        <span style=color:#ff79c6>dest</span>: /etc/issue
+      <span style=color:#ff79c6>when</span>: <span style=color:#f1fa8c>&#39;inventory_hostname in groups.dev&#39;</span>
+    - <span style=color:#ff79c6>name</span>: copy test
+      <span style=color:#ff79c6>copy</span>:
+        <span style=color:#ff79c6>content</span>: <span style=color:#f1fa8c>&#39;Test&#39;</span>
+        <span style=color:#ff79c6>dest</span>: /etc/issue
+      <span style=color:#ff79c6>when</span>: <span style=color:#f1fa8c>&#39;inventory_hostname in groups.test&#39;</span>
+    - <span style=color:#ff79c6>name</span>: copy prod
+      <span style=color:#ff79c6>copy</span>:
+        <span style=color:#ff79c6>content</span>: <span style=color:#f1fa8c>&#39;Production&#39;</span>
+        <span style=color:#ff79c6>dest</span>: /etc/issue
+      <span style=color:#ff79c6>when</span>: <span style=color:#f1fa8c>&#39;inventory_hostname in groups.prod&#39;</span>
+</code></pre></div><h3 id=11创建-web-内容目录待确认是否需要创建组>11、创建 Web 内容目录(待确认是否需要创建组)</h3><p>按照下方所述，创建一个名为 /home/greg/ansible/webcontent.yml 的 playbook ：</p><ul><li>该 playbook 在 dev 主机组中的受管节点上运行</li><li>创建符合下列要求的目录 /webdev ：<ul><li>所有者为 webdev 组</li><li>具有常规权限：owner=read+write+execute ， group=read+write+execute ，other=read+execute</li><li>具有特殊权限：设置组 ID</li></ul></li><li>用符号链接将 /var/www/html/webdev 链接到 /webdev</li><li>创建文件 /webdev/index.html ，其中包含如下所示的单行文件： Development</li><li>在 dev 主机组中主机上浏览此目录（例如 http://172.25.250.9/webdev/ ）将生成以下输出：Development</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim webcontent.yml
+---
+- <span style=color:#ff79c6>name</span>: 创建 Web 内容目录
+<span style=color:#ff79c6>hosts</span>: dev
+<span style=color:#ff79c6>tasks</span>:
+- <span style=color:#ff79c6>name</span>: one
+<span style=color:#ff79c6>file</span>:
+<span style=color:#ff79c6>path</span>: /webdev
+<span style=color:#ff79c6>state</span>: directory
+<span style=color:#ff79c6>group</span>: webdev
+<span style=color:#ff79c6>mode</span>: <span style=color:#f1fa8c>&#39;2775&#39;</span>
+- <span style=color:#ff79c6>name</span>: two
+<span style=color:#ff79c6>file</span>:
+<span style=color:#ff79c6>src</span>: /webdev
+<span style=color:#ff79c6>dest</span>: /var/www/html/webdev
+<span style=color:#ff79c6>state</span>: link
+- <span style=color:#ff79c6>name</span>: three
+<span style=color:#ff79c6>copy</span>:
+<span style=color:#ff79c6>content</span>: <span style=color:#f1fa8c>&#39;Development&#39;</span>
+<span style=color:#ff79c6>dest</span>: /webdev/index.html
+                    <span style=color:#ff79c6>setype</span>: httpd_sys_content_t
+                    
+                    
+                    
+---
+- <span style=color:#ff79c6>name</span>: craete webcontent
+  <span style=color:#ff79c6>hosts</span>: dev
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: create group
+      <span style=color:#ff79c6>group</span>:
+        <span style=color:#ff79c6>name</span>: webdev
+        <span style=color:#ff79c6>state</span>: present
+    - <span style=color:#ff79c6>name</span>: create dir
+      <span style=color:#ff79c6>file</span>:
+        <span style=color:#ff79c6>path</span>: /webdev
+        <span style=color:#ff79c6>group</span>: webdev
+        <span style=color:#ff79c6>mode</span>: <span style=color:#f1fa8c>&#39;2775&#39;</span>
+        <span style=color:#ff79c6>state</span>: directory
+    - <span style=color:#ff79c6>name</span>: create link
+      <span style=color:#ff79c6>file</span>:
+        <span style=color:#ff79c6>src</span>: /webdev
+        <span style=color:#ff79c6>dest</span>: /var/www/html/webdev
+        <span style=color:#ff79c6>state</span>: link
+    - <span style=color:#ff79c6>name</span>: create file
+      <span style=color:#ff79c6>copy</span>:
+        <span style=color:#ff79c6>content</span>: <span style=color:#f1fa8c>&#39;Development&#39;</span>
+        <span style=color:#ff79c6>dest</span>: /webdev/index.html
+        <span style=color:#ff79c6>setype</span>: httpd_sys_content_t
+</code></pre></div><h3 id=12生成硬件报告>12、生成硬件报告</h3><p>创建一个名为 /home/greg/ansible/hwreport.yml 的 playbook ，它将在所有受管节点上生成含有以下信息的输出文件 /root/hwreport.txt ：</p><ul><li>清单主机名称</li><li>以 MB 表示的总内存大小</li><li>BIOS 版本</li><li>磁盘设备 vda 的大小</li><li>磁盘设备 vdb 的大小</li><li>输出文件中的每一行含有一个 key=value 对。</li></ul><p>您的 playbook 应当：</p><ul><li>从 http://materials/hwreport.empty 下载文件，并将它保存为 /root/hwreport.txt</li><li>使用正确的值改为 /root/hwreport.txt</li><li>如果硬件项不存在，相关的值应设为 NONE</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim hwreport.yml
+---
+- <span style=color:#ff79c6>name</span>: generate hw report 
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>vars</span>:
+    <span style=color:#ff79c6>hw_all</span>:
+      - <span style=color:#ff79c6>hw_name</span>: HOST
+        <span style=color:#ff79c6>hw_cont</span>: <span style=color:#f1fa8c>&#34;{{ inventory_hostname | default(&#39;NONE&#39;,true) }}&#34;</span>
+      - <span style=color:#ff79c6>hw_name</span>: MEMORY
+        <span style=color:#ff79c6>hw_cont</span>: <span style=color:#f1fa8c>&#34;{{ ansible_memtotal_mb | default(&#39;NONE&#39;,true) }}&#34;</span>
+      - <span style=color:#ff79c6>hw_name</span>: BIOS
+        <span style=color:#ff79c6>hw_cont</span>: <span style=color:#f1fa8c>&#34;{{ ansible_bios_version | default(&#39;NONE&#39;,true) }}&#34;</span>
+      - <span style=color:#ff79c6>hw_name</span>: DISK_SIZE_VDA
+        <span style=color:#ff79c6>hw_cont</span>: <span style=color:#f1fa8c>&#34;{{ ansible_devices.vda.size | default(&#39;NONE&#39;,true) }}&#34;</span>
+      - <span style=color:#ff79c6>hw_name</span>: DISK_SIZE_VDB
+        <span style=color:#ff79c6>hw_cont</span>: <span style=color:#f1fa8c>&#34;{{ ansible_devices.vdb.size | default(&#39;NONE&#39;,true) }}&#34;</span>
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: download empty
+      <span style=color:#ff79c6>get_url</span>:
+        <span style=color:#ff79c6>url</span>: http://materials/hwreport.empty
+        <span style=color:#ff79c6>dest</span>: /root/hwreport.txt
+    - <span style=color:#ff79c6>name</span>: generate
+      <span style=color:#ff79c6>lineinfile</span>:
+        <span style=color:#ff79c6>path</span>: /root/hwreport.txt
+        <span style=color:#ff79c6>regexp</span>: <span style=color:#f1fa8c>&#34;^{{ item.hw_name }}&#34;</span>
+        <span style=color:#ff79c6>line</span>: <span style=color:#f1fa8c>&#34;{{ item.hw_name }}={{ item.hw_cont }}&#34;</span>
+      <span style=color:#ff79c6>loop</span>: <span style=color:#f1fa8c>&#34;{{ hw_all }}&#34;</span>
+</code></pre></div><h3 id=13创建密码库>13、创建密码库</h3><p>按照下方所述，创建一个 Ansible 库来存储用户密码：</p><ul><li>库名称为 /home/greg/ansible/locker.yml</li><li>库中含有两个变量，名称如下：<ul><li>pw_developer，值为 Imadev</li><li>pw_manager，值为 Imamgr</li></ul></li><li>用于加密和解密该库的密码为 whenyouwishuponastar</li><li>密码存储在文件 /home/greg/ansible/secret.txt 中</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim ansible.cfg
+<span style=color:#6272a4>#仅修改一行</span>
+<span style=color:#8be9fd;font-style:italic>vault_password_file</span> <span style=color:#ff79c6>=</span> /home/greg/ansible/secret.txt
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim locker.yml
+---
+pw_developer: Imadev
+pw_manager: Imamgr
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ <span style=color:#8be9fd;font-style:italic>echo</span> whenyouwishuponastar &gt; secret.txt
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible-vault encrypt locker.yml
+</code></pre></div><h3 id=14创建用户帐户>14、创建用户帐户</h3><p>从 http://materials/user_list.yml 下载要创建的用户的列表，并将它保存到 /home/greg/ansible</p><ul><li>在本次考试中使用在其他位置创建的密码库 /home/greg/ansible/locker.yml 。创建名为 /home/greg/ansible/users.yml 的 playbook ，从而按以下所述创建用户帐户：<ul><li>职位描述为 developer 的用户应当：<ul><li>在 dev 和 test 主机组中的受管节点上创建</li><li>从 pw_developer 变量分配密码</li><li>是补充组 devops 的成员</li></ul></li><li>职位描述为 manager 的用户应当：<ul><li>在 prod 主机组中的受管节点上创建</li><li>从 pw_manager 变量分配密码</li><li>是补充组 opsmgr 的成员</li></ul></li></ul></li><li>密码采用 SHA512 哈希格式。</li><li>您的 playbook 应能够在本次考试中使用在其他位置创建的库密码文件 /home/greg/ansible/secret.txt 正常运行。</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ wget http://materials/user_list.yml
+[greg@bastion ansible]$ vim users.yml
+---
+- <span style=color:#ff79c6>name</span>: craete user account
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>vars_files</span>:
+    - /home/greg/ansible//user_list.yml
+    - /home/greg/ansible/locker.yml
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: create group1
+      <span style=color:#ff79c6>group</span>:
+        <span style=color:#ff79c6>name</span>: devops
+        <span style=color:#ff79c6>state</span>: present
+      <span style=color:#ff79c6>loop</span>: <span style=color:#f1fa8c>&#34;{{ users }}&#34;</span>
+      <span style=color:#ff79c6>when</span>: item.job == &#39;developer&#39; and (inventory_hostname in groups.dev or inventory_hostname in groups.test)
+    - <span style=color:#ff79c6>name</span>: create user1
+      <span style=color:#ff79c6>user</span>:
+        <span style=color:#ff79c6>name</span>: <span style=color:#f1fa8c>&#34;{{ item.name }}&#34;</span> 
+        <span style=color:#ff79c6>password</span>: <span style=color:#f1fa8c>&#34;{{ &#39;pw_developer&#39; | password_hash(&#39;sha512&#39;,&#39;mysecretsalt&#39;) }}&#34;</span>
+        <span style=color:#ff79c6>groups</span>: devops
+      <span style=color:#ff79c6>loop</span>: <span style=color:#f1fa8c>&#34;{{ users }}&#34;</span>
+      <span style=color:#ff79c6>when</span>: item.job == &#39;developer&#39; and (inventory_hostname in groups.dev or inventory_hostname in groups.test)
+    - <span style=color:#ff79c6>name</span>: create group2
+      <span style=color:#ff79c6>group</span>:
+        <span style=color:#ff79c6>name</span>: opsmgr
+        <span style=color:#ff79c6>state</span>: present
+      <span style=color:#ff79c6>loop</span>: <span style=color:#f1fa8c>&#34;{{ users }}&#34;</span>
+      <span style=color:#ff79c6>when</span>: item.job == &#39;manager&#39; and inventory_hostname in groups.prod
+    - <span style=color:#ff79c6>name</span>: create user2
+      <span style=color:#ff79c6>user</span>:
+        <span style=color:#ff79c6>name</span>: <span style=color:#f1fa8c>&#34;{{ item.name }}&#34;</span> 
+        <span style=color:#ff79c6>password</span>: <span style=color:#f1fa8c>&#34;{{ &#39;pw_manager&#39; | password_hash(&#39;sha512&#39;,&#39;mysecretsalt&#39;) }}&#34;</span>
+        <span style=color:#ff79c6>groups</span>: opsmgr
+      <span style=color:#ff79c6>loop</span>: <span style=color:#f1fa8c>&#34;{{ users }}&#34;</span>
+      <span style=color:#ff79c6>when</span>: item.job == &#39;manager&#39; and inventory_hostname in groups.prod
+</code></pre></div><h3 id=15更新-ansible-库的密钥>15、更新 Ansible 库的密钥</h3><p>按照下方所述，更新现有 Ansible 库的密钥：</p><ul><li>从 http://materials/salaries.yml 下载 Ansible 库到 /home/greg/ansible</li><li>当前的库密码为 insecure8sure</li><li>新的库密码为 bbs2you9527</li><li>库使用新密码保持加密状态</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ wget http://materials/salaries.yml
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible-vault rekey --ask-vault-pass salaries.yml
+Vault password: 粘贴当前密码
+New Vault password: 粘贴新密码
+Confirm New Vault password: 粘贴新密码
+
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ ansible-vault view salaries.yml
+</code></pre></div><h3 id=16配置-cron-作业新增>16、配置 cron 作业（新增）</h3><p>创建一个名为 /home/greg/ansible/cron.yml 的 playbook ，</p><ul><li>配置 <code>cron</code> 作业，该作业<code>每隔 2 分钟</code>运行并执行以下命令：</li><li><code>logger "EX294 in progress"</code>，以用户 <code>natasha</code> 身份运行</li></ul><p>解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>[greg@bastion ansible]$ vim cron.yml
+---
+- <span style=color:#ff79c6>name</span>: create cronjob
+  <span style=color:#ff79c6>hosts</span>: all
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: create user
+      <span style=color:#ff79c6>user</span>:
+        <span style=color:#ff79c6>name</span>: natasha
+        <span style=color:#ff79c6>state</span>: present
+    - <span style=color:#ff79c6>name</span>: run cronjob
+      <span style=color:#ff79c6>cron</span>:
+        <span style=color:#ff79c6>name</span>: <span style=color:#f1fa8c>&#34;logger info&#34;</span>
+        <span style=color:#ff79c6>minute</span>: <span style=color:#f1fa8c>&#34;*/2&#34;</span>
+        <span style=color:#ff79c6>job</span>: <span style=color:#f1fa8c>&#39;logger &#34;EX294 in progress&#34;&#39;</span>
+        <span style=color:#ff79c6>user</span>: natasha
+</code></pre></div><h3 id=17创建分区隐藏题有概率出现>17、创建分区（隐藏题、有概率出现）</h3><p>在balancers主机上，划分新的分区，设备为/dev/vdd，编号1，大小1500m，格式化成ext4，mount到/newpart1目录，如果空间不够，分800m，如果没有vdd，报错
+解题方法：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+- <span style=color:#ff79c6>name</span>: create partition
+  <span style=color:#ff79c6>hosts</span>: balancers
+  <span style=color:#ff79c6>tasks</span>:
+    - <span style=color:#ff79c6>name</span>: start create partitoin
+      <span style=color:#ff79c6>block</span>:
+        - <span style=color:#ff79c6>name</span>: parted
+          <span style=color:#ff79c6>parted</span>:
+            <span style=color:#ff79c6>device</span>: /dev/vdd
+            <span style=color:#ff79c6>number</span>: <span style=color:#bd93f9>1</span>
+            <span style=color:#ff79c6>state</span>: present
+            <span style=color:#ff79c6>part_end</span>: 1500MiB
+        - <span style=color:#ff79c6>name</span>: filesystem
+          <span style=color:#ff79c6>filesystem</span>:
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>dev</span>: /dev/vdd1
+        - <span style=color:#ff79c6>name</span>: mount
+          <span style=color:#ff79c6>mount</span>:
+            <span style=color:#ff79c6>path</span>: /newpart1
+            <span style=color:#ff79c6>src</span>: /dev/vdd1
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>state</span>: mounted
+      <span style=color:#ff79c6>rescue</span>:
+        - <span style=color:#ff79c6>debug</span>:
+            <span style=color:#ff79c6>msg</span>: <span style=color:#f1fa8c>&#34;can not create that partition with space&#34;</span>
+        - <span style=color:#ff79c6>name</span>: parted
+          <span style=color:#ff79c6>parted</span>:
+            <span style=color:#ff79c6>device</span>: /dev/vdd
+            <span style=color:#ff79c6>number</span>: <span style=color:#bd93f9>1</span>
+            <span style=color:#ff79c6>state</span>: present
+            <span style=color:#ff79c6>part_end</span>: 800MiB
+          <span style=color:#ff79c6>when</span>: ansible_facts.devices.vdd is defined
+        - <span style=color:#ff79c6>name</span>: filesystem
+          <span style=color:#ff79c6>filesystem</span>:
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>dev</span>: /dev/vdd1
+          <span style=color:#ff79c6>when</span>: ansible_facts.devices.vdd is defined
+        - <span style=color:#ff79c6>name</span>: mount
+          <span style=color:#ff79c6>mount</span>:
+            <span style=color:#ff79c6>path</span>: /newpart1
+            <span style=color:#ff79c6>src</span>: /dev/vdd1
+            <span style=color:#ff79c6>fstype</span>: ext4
+            <span style=color:#ff79c6>state</span>: mounted
+          <span style=color:#ff79c6>when</span>: ansible_facts.devices.vdd is defined
+        - <span style=color:#ff79c6>debug</span>:
+            <span style=color:#ff79c6>msg</span>: <span style=color:#f1fa8c>&#34;vdd not exsit&#34;</span>
+          <span style=color:#ff79c6>when</span>: ansible_facts.devices.vdd is undefined
+</code></pre></div><h3 id=18安装rhel角色隐藏题有概率出现>18、安装RHEL角色（隐藏题、有概率出现）</h3><p>安装RHEL角色，并使用SELinux角色，要求在所有节点运行，将SELinux设置为强制模式。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ dnf install rhel-system-roles -y
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ cp -rf /usr/share/ansible/roles/linux-system-roles.selinux ./
+<span style=color:#ff79c6>[</span>greg@bastion ansible<span style=color:#ff79c6>]</span>$ vim selinux.yml
+<span style=color:#6272a4>#安装出来后可以改也可以不改，改的话就剩下这些就可以，多余的删除。</span>
+---
+- hosts: all
+  vars:
+          selinux_policy: targeted
+          selinux_state: enforcing
+  roles:
+    - role: roles/rhel-system-roles.selinux
+  tasks:
+          - name: apply SElinux role
+            block:
+                    - include_roles:
+                            name: roles/rhel-system-roles.selinux
+            rescue:
+                    - name: check
+                      fail:
+                      when: not selinux_reboot_required
+                    - name: reboot
+                      reboot:
+                    - name: changed
+                      include_role:
+                        name: roles/rhel-system-roles.selinux
+</code></pre></div><div class="entry-shang text-center"><p>「真诚赞赏，手留余香」</p><button class="zs show-zs btn btn-bred">赞赏支持</button></div><div class=zs-modal-bg></div><div class=zs-modal-box><div class=zs-modal-head><button type=button class=close>×</button>
+<span class=author><a href=https://willzhang.github.io><img src=/img/favicon.png>WillBlog</a></span><p class=tip><i></i><span>真诚赞赏，手留余香</span></p></div><div class=zs-modal-body><div class=zs-modal-btns><button class="btn btn-blink" data-num=2>2元</button>
+<button class="btn btn-blink" data-num=5>5元</button>
+<button class="btn btn-blink" data-num=10>10元</button>
+<button class="btn btn-blink" data-num=50>50元</button>
+<button class="btn btn-blink" data-num=100>100元</button>
+<button class="btn btn-blink" data-num=1>任意金额</button></div><div class=zs-modal-pay><button class="btn btn-bred" id=pay-text>2元</button><p>使用<span id=pay-type>微信</span>扫描二维码完成支付</p><img src=/img/reward/wechat-2.png id=pay-image></div></div><div class=zs-modal-footer><label><input type=radio name=zs-type value=wechat class=zs-type checked><span><span class=zs-wechat><img src=/img/reward/wechat-btn.png></span></label>
+<label><input type=radio name=zs-type value=alipay class=zs-type class=zs-alipay><img src=/img/reward/alipay-btn.png></span></label></div></div><script type=text/javascript src=/js/reward.js></script><hr><ul class=pager><li class=previous><a href=/post/summary/ data-toggle=tooltip data-placement=top title>&larr;
+Previous Post</a></li><li class=next><a href=/post/readme/ data-toggle=tooltip data-placement=top title>Next
+Post &rarr;</a></li></ul><div id=disqus-comment></div><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//willdis.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-11 col-lg-offset-1
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/vpn title=vpn>vpn</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://willzhang.github.com>will的博客</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href rel=alternate type=application/rss+xml title=WillBlog><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a href=mailto:youremail@gmail.com><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=/your%20wechat%20qr%20code%20image><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-weixin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/yourgithub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://www.linkedin.com/in/yourlinkedinid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://stackoverflow.com/users/yourstackoverflowid><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; WillBlog 2022<br>Theme by <a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a>
+<span style="display:inline-block;margin:0 5px"><i class="fa fa-heart"></i></span>
+Publish by <a href=https://x.topthink.com/books>x.topthink</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function loadAsync(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&loadAsync("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-136782518-3','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
