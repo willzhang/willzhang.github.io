@@ -1,3 +1,12 @@
+---
+title: "RHCE 题库"
+tags:
+    - linux
+categories: [ TECH ]
+date:       2022-06-21
+image: "img/Statue-of-Liberty.jpeg"
+---
+
 **RHCE满分300分，210分即通过，时间4小时（下午）。**
 
 **参考：**[https://chowdera.com/2022/02/202202220450472345.html](https://chowdera.com/2022/02/202202220450472345.html)
