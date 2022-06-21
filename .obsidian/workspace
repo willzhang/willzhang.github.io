@@ -7,12 +7,8 @@
         "id": "1a8000919715107a",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "content/post/rhce.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -69,7 +65,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/post/rhce.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,15 +84,15 @@
   },
   "active": "1a8000919715107a",
   "lastOpenFiles": [
+    "Pasted image 20220621191725.png",
+    "content/post/images/Pasted image 20220621192023.png",
+    "content/post/images/Pasted image 20220621192035.png",
     "content/post/rhce.md",
     "content/post/install-clash.md",
     "content/post/install-shadowsocks.md",
     "content/post/SUMMARY.md",
     "content/post/windows10-install-vuecli.md",
     "content/post/argocd-gitlab.md",
-    "static/img/war.jpg",
-    "static/img/tt.png",
-    "static/img/tn.png",
-    "static/img/starlink.jpg"
+    "static/img/war.jpg"
   ]
 }

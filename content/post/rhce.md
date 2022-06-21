@@ -17,7 +17,7 @@ image: "img/Statue-of-Liberty.jpeg"
 **系统信息**
 在本考试期间，您将操作下列虚拟系统：
 
-![[Pasted image 20220621191725.png]]
+![[Pasted image 20220621192035.png]]
 
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/247390/1653464993702-81c49811-8e6f-4c9a-a940-95bfba3387e5.png#clientId=u62b316b0-7c41-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=ua7836a3e&margin=%5Bobject%20Object%5D&originHeight=229&originWidth=704&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u77139407-a73d-4a98-90ea-080583f18b7&title=)
