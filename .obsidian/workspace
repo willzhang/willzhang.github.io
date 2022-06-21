@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "content/post/rhce.md",
+            "file": "content/post/install-shadowsocks.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/post/rhce.md",
+                "file": "content/post/install-shadowsocks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,6 +89,9 @@
   },
   "active": "1a8000919715107a",
   "lastOpenFiles": [
+    "content/post/install-shadowsocks.md",
+    "content/post/install-clash.md",
+    "content/post/readme.md",
     "content/post/rhce.md"
   ]
 }
