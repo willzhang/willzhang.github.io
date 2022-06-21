@@ -3,5 +3,8 @@
   "livePreview": true,
   "readableLineLength": false,
   "attachmentFolderPath": "./images",
-  "promptDelete": false
+  "promptDelete": false,
+  "strictLineBreaks": false,
+  "showFrontmatter": false,
+  "foldHeading": true
 }
