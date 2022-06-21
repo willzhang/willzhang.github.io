@@ -6,6 +6,7 @@
       {
         "id": "1a8000919715107a",
         "type": "leaf",
+        "dimension": 79.59442332065906,
         "state": {
           "type": "markdown",
           "state": {
@@ -13,7 +14,20 @@
             "mode": "source",
             "source": false
           }
-        }
+        },
+        "group": "2763134ccd938f40"
+      },
+      {
+        "id": "576d4dc4afbf2b75",
+        "type": "leaf",
+        "dimension": 20.405576679340935,
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "content/post/rhce.md"
+          }
+        },
+        "group": "2763134ccd938f40"
       }
     ],
     "direction": "vertical"

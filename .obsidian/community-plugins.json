@@ -1,5 +1,6 @@
 [
   "obsidian-git",
   "remotely-save",
-  "cm-editor-syntax-highlight-obsidian"
+  "cm-editor-syntax-highlight-obsidian",
+  "cmenu-plugin"
 ]
