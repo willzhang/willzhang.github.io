@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "f0795c6a9511d292",
+    "type": "split",
+    "children": [
+      {
+        "id": "1a8000919715107a",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "content/post/rhce.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ae55436d7968251e",
+    "type": "split",
+    "children": [
+      {
+        "id": "09ab324ef846f4a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "08e8232f1ec3f022",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "d7219c0d7edc2341",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cce139902b7dfe70",
+    "type": "split",
+    "children": [
+      {
+        "id": "83007d64fdee86e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "221c2741ad8d9c2c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "content/post/rhce.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "1a8000919715107a",
+  "lastOpenFiles": [
+    "content/post/rhce.md"
+  ]
+}
