@@ -2,7 +2,7 @@
 title: "RHCE 题库"
 tags:
     - linux
-categories: [ TECH ]
+categories: [ TECH ]``
 date:       2022-06-21
 image: "img/Statue-of-Liberty.jpeg"
 ---
@@ -10,7 +10,7 @@ image: "img/Statue-of-Liberty.jpeg"
 **RHCE满分300分，210分即通过，时间4小时（下午）。**
 
 **参考：**[https://chowdera.com/2022/02/202202220450472345.html](https://chowdera.com/2022/02/202202220450472345.html)
-
+``
 ## 考试环境
 **重要配置信息**
 在考试期间，除了您就坐位置的台式机之外，还将使用多个虚拟系统。您不具有台式机系统的 root 访问权，但具有对虚拟系统的完整 root 访问权。

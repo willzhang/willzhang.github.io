@@ -1,0 +1,8 @@
+{
+  "pinned": [
+    "editor:toggle-code",
+    "editor:toggle-bullet-list",
+    "editor:set-heading",
+    "editor:toggle-numbered-list"
+  ]
+}
